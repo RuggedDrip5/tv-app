@@ -1,0 +1,41 @@
+package com.example.tvapp.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
+
+@Data
+@Entity
+@Table(name = "televisions")
+public class Television {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String brand;
+
+    @Column(nullable = false)
+    private String model;
+
+    @Column(nullable = false)
+    private double price;
+
+    @Column(nullable = false)
+    private int screenSize; // in inches
+
+    @Column(nullable = false)
+    private String resolution;
+
+    @Column(nullable = false)
+    private boolean smartTv;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+}

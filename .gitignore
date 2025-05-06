@@ -1,0 +1,12 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+target/
+
+# Logs
+logs/
+*.log
+
+# Other
+.DS_Store
