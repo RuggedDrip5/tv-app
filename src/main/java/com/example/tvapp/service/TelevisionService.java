@@ -1,5 +1,7 @@
 package com.example.tvapp.service;
 
+import com.example.tvapp.exception.InvalidDataException;
+import com.example.tvapp.exception.ResourceNotFoundException;
 import com.example.tvapp.model.Television;
 import com.example.tvapp.repository.TelevisionRepository;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,11 @@ public class TelevisionService {
     }
 
     public Television createTelevision(Television television) {
+        if (television.getBrand() == null || television.getBrand().isEmpty()) {
+            throw new InvalidDataException("Brand cannot be empty");
+        }
+        // Добавьте другие проверки по необходимости
+
         return repository.save(television);
     }
 
@@ -38,13 +45,13 @@ public class TelevisionService {
                     television.setSmartTv(updatedTelevision.isSmartTv());
                     return repository.save(television);
                 })
-                .orElseGet(() -> {
-                    updatedTelevision.setId(id);
-                    return repository.save(updatedTelevision);
-                });
+                .orElseThrow(() -> new ResourceNotFoundException("Television not found with id: " + id));
     }
 
     public void deleteTelevision(Long id) {
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException("Television not found with id: " + id);
+        }
         repository.deleteById(id);
     }
 }

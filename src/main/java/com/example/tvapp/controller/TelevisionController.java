@@ -17,9 +17,14 @@ public class TelevisionController {
         this.service = service;
     }
 
+    @GetMapping("/health")
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("Service is healthy");
+    }
+
     @GetMapping
-    public List<Television> getAllTelevisions() {
-        return service.getAllTelevisions();
+    public ResponseEntity<List<Television>> getAllTelevisions() {
+        return ResponseEntity.ok(service.getAllTelevisions());
     }
 
     @GetMapping("/{id}")

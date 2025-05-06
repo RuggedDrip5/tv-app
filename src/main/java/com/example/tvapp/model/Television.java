@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import java.math.BigDecimal;
+
+
 
 import java.time.LocalDateTime;
 
@@ -21,8 +24,8 @@ public class Television {
     @Column(nullable = false)
     private String model;
 
-    @Column(nullable = false)
-    private double price;
+    @Column(nullable = false, columnDefinition = "DECIMAL(10,2)")
+    private BigDecimal price;
 
     @Column(nullable = false)
     private int screenSize; // in inches
